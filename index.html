@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elene's Interactive Website</title>
     <style>
+        /* Base Styles */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -16,17 +17,20 @@
             align-items: center;
             flex-direction: column;
             position: relative;
+            padding: 20px;
         }
 
         h1 {
             color: rgb(179, 0, 179);
             filter: blur(1px);
-            
+            font-size: 5vw; /* Scalable font size */
+            text-align: center;
+            margin-bottom: 20px;
         }
 
         button {
             padding: 10px 20px;
-            font-size: 18px;
+            font-size: 1.2rem; /* Responsive font size */
             color: white;
             background: rgb(156, 90, 223);
             border: none;
@@ -39,16 +43,58 @@
         button:hover {
             transform: scale(1.1);
         }
-        button:active{
+
+        button:active {
             transform: translateY(3px);
         }
 
         .flying-text {
             position: absolute;
-            font-size: 24px;
+            font-size: 4vw; 
             font-weight: bold;
             pointer-events: none;
             text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 7vw; 
+            }
+
+            button {
+                font-size: 1rem;
+                padding: 8px 16px;
+            }
+
+            .flying-text {
+                font-size: 5vw;
+            }
+        }
+
+        @media (max-width: 320px) {
+            h1 {
+                font-size: 8vw; 
+            }
+
+            button {
+                font-size: 0.9rem;
+                padding: 6px 12px;
+            }
+
+            .flying-text {
+                font-size: 6vw;
+            }
+        }
+
+        @media (min-width: 1920px) {
+            h1 {
+                font-size: 3vw;
+            }
+
+            .flying-text {
+                font-size: 2.5vw;
+            }
         }
     </style>
 </head>
@@ -74,7 +120,7 @@
             document.body.appendChild(flyingText);
 
             const endY = window.innerHeight + 50;
-            const duration = 3000 + Math.random() * 2000;
+            const duration = window.innerWidth < 768 ? 2000 : 3000 + Math.random() * 2000;
 
             flyingText.animate([
                 { transform: `translateY(0)`, opacity: 1 },
