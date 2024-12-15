@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elene's Interactive Website</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            background: linear-gradient(125deg, #6a11cb, black);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+        }
+
+        h1 {
+            color: rgb(179, 0, 179);
+            filter: blur(1px);
+            
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            color: white;
+            background: rgb(156, 90, 223);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+        button:active{
+            transform: translateY(3px);
+        }
+
+        .flying-text {
+            position: absolute;
+            font-size: 24px;
+            font-weight: bold;
+            pointer-events: none;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Elene's World!</h1>
+    <button id="dropTextButton">Click me!</button>
+
+    <script>
+        const button = document.getElementById('dropTextButton');
+
+        button.addEventListener('click', () => {
+            const flyingText = document.createElement('div');
+            flyingText.className = 'flying-text';
+            flyingText.innerText = 'Elene <3';
+
+            const startX = Math.random() * window.innerWidth;
+            flyingText.style.left = `${startX}px`;
+            flyingText.style.top = '-50px';
+
+            const randomColor = `hsl(${Math.random() * 360}, 80%, 70%)`;
+            flyingText.style.color = randomColor;
+
+            document.body.appendChild(flyingText);
+
+            const endY = window.innerHeight + 50;
+            const duration = 3000 + Math.random() * 2000;
+
+            flyingText.animate([
+                { transform: `translateY(0)`, opacity: 1 },
+                { transform: `translateY(${endY}px)`, opacity: 0 }
+            ], {
+                duration: duration,
+                easing: 'ease-out',
+                iterations: 1
+            });
+
+            setTimeout(() => {
+                flyingText.remove();
+            }, duration);
+        });
+    </script>
+</body>
+</html>
